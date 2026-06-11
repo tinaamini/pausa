@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 606.15 456.63">
+  <defs>
+    <radialGradient id="radial-gradient" cx="335.06" cy="235.08" fx="434.49" fy="63.68" r="325.53" gradientTransform="translate(666.14 465.65) rotate(-179) scale(1 .96)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#a595c8"/>
+      <stop offset=".64" stop-color="#efecf6"/>
+      <stop offset=".82" stop-color="#f1e4f0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="309.69" cy="228.32" r="228.32" style="fill: url(#radial-gradient);"/>
+  <path d="M283.37,121.38s28.03,22.71,65.3-2.38" style="fill: none; stroke: #000; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 5px;"/>
+  <path d="M421.07,102.51s-24.99-35.67-63.06,2.98" style="fill: none; stroke: #000; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 5px;"/>
+  <path d="M275.76,107.46s-31.87-40.35-65.3,2.38" style="fill: none; stroke: #000; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 5px;"/>
+  <g>
+    <path d="M40.22,59.85S.43,76.6,1.52,113.42c1.86,62.82,29.74,141.32,166.95,106.2" style="fill: none; stroke: #231f20; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 3px;"/>
+    <circle cx="29.8" cy="109.84" r="25.91" style="fill: none; stroke: #231f20; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 3px;"/>
+  </g>
+  <g>
+    <path d="M568.67,59.85s36.97,16.75,35.96,53.56c-1.73,62.82-27.63,141.32-155.1,106.2" style="fill: none; stroke: #231f20; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 3px;"/>
+    <ellipse cx="578.36" cy="109.84" rx="24.07" ry="25.91" style="fill: none; stroke: #231f20; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 3px;"/>
+  </g>
+</svg>
