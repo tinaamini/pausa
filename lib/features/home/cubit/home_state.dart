@@ -1,11 +1,13 @@
 
+import 'package:pausa/data/models/app_blocked.dart';
+
 class HomeState {
   final String userName;
   final int streakDays;
   final int blockedAppsCount;
   final int timeSavedMinutes;
   final int sessionsCount;
-  // final List<BlockedApp> recentlyBlocked;
+  final List<BlockedApp> recentlyBlocked;
   final bool hasFocusSession;
   final int focusRemainingSeconds;
   final bool isLoading;
@@ -16,7 +18,7 @@ class HomeState {
     this.blockedAppsCount = 0,
     this.timeSavedMinutes = 0,
     this.sessionsCount = 0,
-    // this.recentlyBlocked = const [],
+    this.recentlyBlocked = const [],
     this.hasFocusSession = false,
     this.focusRemainingSeconds = 0,
     this.isLoading = true,
@@ -28,7 +30,7 @@ class HomeState {
     int? blockedAppsCount,
     int? timeSavedMinutes,
     int? sessionsCount,
-    // List<BlockedApp>? recentlyBlocked,
+    List<BlockedApp>? recentlyBlocked,
     bool? hasFocusSession,
     int? focusRemainingSeconds,
     bool? isLoading,
@@ -39,7 +41,7 @@ class HomeState {
       blockedAppsCount: blockedAppsCount ?? this.blockedAppsCount,
       timeSavedMinutes: timeSavedMinutes ?? this.timeSavedMinutes,
       sessionsCount: sessionsCount ?? this.sessionsCount,
-      // recentlyBlocked: recentlyBlocked ?? this.recentlyBlocked,
+      recentlyBlocked: recentlyBlocked ?? this.recentlyBlocked,
       hasFocusSession: hasFocusSession ?? this.hasFocusSession,
       focusRemainingSeconds: focusRemainingSeconds ?? this.focusRemainingSeconds,
       isLoading: isLoading ?? this.isLoading,

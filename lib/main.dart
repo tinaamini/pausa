@@ -1,17 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:pausa/features/home/cubit/home_Cubit.dart';
 
 import 'core/router/router.dart';
 import 'core/theme/app_size.dart';
-import 'features/home/cubit/home_state.dart';
 import 'features/utils/cubits/local_cubit.dart';
 import 'generated/app_localizations.dart';
 
@@ -21,7 +17,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Hive.initFlutter();
-
+  await Hive.openBox('settings');
+  await Hive.openBox('blocked_apps');
   // final onboardingShowCubit = OnboardingShowCubit(storage);
   // await onboardingShowCubit.load();
 

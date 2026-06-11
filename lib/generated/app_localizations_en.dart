@@ -12,9 +12,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appName => 'Pausa';
 
   @override
-  String get welcomeTitle => 'Welcome to Pausa';
-
-  @override
   String get welcomeSubtitle => 'Control today. Focus on what matters.';
 
   @override
@@ -60,9 +57,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get currentStreak => 'Current Streak';
 
   @override
-  String days(int count) {
-    return '$count days';
-  }
+  String get days => ' days';
+
+  @override
+  String get keepItUp => 'keep it up!🔥';
 
   @override
   String get blockedApps => 'Blocked Apps';
@@ -72,6 +70,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sessions => 'Sessions';
+
+  @override
+  String get start => 'Start';
+
+  @override
+  String get recentlyBlocked => 'Recently Blocked';
+
+  @override
+  String get noBlockedApps => 'No blocked apps yet';
+
+  @override
+  String get continueButton => 'Continue';
+
+  @override
+  String get today => 'today';
 
   @override
   String get allApps => 'All Apps';

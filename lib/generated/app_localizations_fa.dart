@@ -12,9 +12,6 @@ class AppLocalizationsFa extends AppLocalizations {
   String get appName => 'پائوزا';
 
   @override
-  String get welcomeTitle => 'خوش اومدی به پائوزا';
-
-  @override
   String get welcomeSubtitle => 'کنترل امروز. تمرکز روی چیزی که مهمه.';
 
   @override
@@ -60,9 +57,10 @@ class AppLocalizationsFa extends AppLocalizations {
   String get currentStreak => 'استریک فعلی';
 
   @override
-  String days(int count) {
-    return '$count روز';
-  }
+  String get days => 'روز';
+
+  @override
+  String get keepItUp => 'keep it up!🔥';
 
   @override
   String get blockedApps => 'اپ‌های بلاک‌شده';
@@ -72,6 +70,21 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get sessions => 'سشن‌ها';
+
+  @override
+  String get start => 'شروع';
+
+  @override
+  String get recentlyBlocked => 'اخیراً بلاک ‌شده';
+
+  @override
+  String get noBlockedApps => 'هنوز اپی بلاک نشده';
+
+  @override
+  String get continueButton => 'ادامه';
+
+  @override
+  String get today => 'امروز';
 
   @override
   String get allApps => 'همه اپ‌ها';

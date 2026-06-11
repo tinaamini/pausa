@@ -104,12 +104,6 @@ abstract class AppLocalizations {
   /// **'Pausa'**
   String get appName;
 
-  /// No description provided for @welcomeTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Welcome to Pausa'**
-  String get welcomeTitle;
-
   /// No description provided for @welcomeSubtitle.
   ///
   /// In en, this message translates to:
@@ -203,8 +197,14 @@ abstract class AppLocalizations {
   /// No description provided for @days.
   ///
   /// In en, this message translates to:
-  /// **'{count} days'**
-  String days(int count);
+  /// **' days'**
+  String get days;
+
+  /// No description provided for @keepItUp.
+  ///
+  /// In en, this message translates to:
+  /// **'keep it up!🔥'**
+  String get keepItUp;
 
   /// No description provided for @blockedApps.
   ///
@@ -223,6 +223,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sessions'**
   String get sessions;
+
+  /// No description provided for @start.
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get start;
+
+  /// No description provided for @recentlyBlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Recently Blocked'**
+  String get recentlyBlocked;
+
+  /// No description provided for @noBlockedApps.
+  ///
+  /// In en, this message translates to:
+  /// **'No blocked apps yet'**
+  String get noBlockedApps;
+
+  /// No description provided for @continueButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continueButton;
+
+  /// No description provided for @today.
+  ///
+  /// In en, this message translates to:
+  /// **'today'**
+  String get today;
 
   /// No description provided for @allApps.
   ///

@@ -1,28 +1,33 @@
 import 'package:hive/hive.dart';
 
-
-@HiveType(typeId: 0)
-class AppSettings extends HiveObject {
-  @HiveField(0)
+class AppSettings {
   String userName;
-
-  @HiveField(1)
   bool isParentMode;
-
-  @HiveField(2)
   int streakDays;
-
-  @HiveField(3)
-  String themeMode; // 'dark' | 'light' | 'system'
-
-  // @HiveField(4)
-  // String language; // 'fa' | 'en'
+  String themeMode;
+  String language;
 
   AppSettings({
-    this.userName = 'tina',
+    this.userName = 'کاربر',
     this.isParentMode = false,
     this.streakDays = 0,
     this.themeMode = 'system',
-    // this.language = 'fa',
+    this.language = 'fa',
   });
+
+  Map<String, dynamic> toMap() => {
+    'userName': userName,
+    'isParentMode': isParentMode,
+    'streakDays': streakDays,
+    'themeMode': themeMode,
+    'language': language,
+  };
+
+  factory AppSettings.fromMap(Map map) => AppSettings(
+    userName: map['userName'] ?? 'کاربر',
+    isParentMode: map['isParentMode'] ?? false,
+    streakDays: map['streakDays'] ?? 0,
+    themeMode: map['themeMode'] ?? 'system',
+    language: map['language'] ?? 'fa',
+  );
 }

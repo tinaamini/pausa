@@ -59,8 +59,7 @@ class MainActivity : FlutterActivity() {
         val apps = mutableListOf<Map<String, String>>()
 
         for (pkg in packages) {
-            val appInfo = pkg.applicationInfo ?: continue // 👈 اگر null بود، برو بعدی
-            // فقط اپ‌های کاربر (نه اپ‌های سیستمی)
+            val appInfo = pkg.applicationInfo ?: continue
             if ((appInfo.flags and android.content.pm.ApplicationInfo.FLAG_SYSTEM) == 0) {
                 val label = pm.getApplicationLabel(appInfo).toString()
                 val packageName = appInfo.packageName
@@ -99,7 +98,7 @@ class MainActivity : FlutterActivity() {
     private fun getForegroundApp(): String {
         val usageStatsManager = getSystemService(USAGE_STATS_SERVICE) as UsageStatsManager
         val endTime = System.currentTimeMillis()
-        val beginTime = endTime - 10_000 // بررسی ۱۰ ثانیه اخیر
+        val beginTime = endTime - 10_000
 
         val usageEvents = usageStatsManager.queryEvents(beginTime, endTime)
         var lastApp = "unknown"

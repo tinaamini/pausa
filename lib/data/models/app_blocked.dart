@@ -1,22 +1,8 @@
-import 'package:hive/hive.dart';
-
-// part 'blocked_app.g.dart';
-
-@HiveType(typeId: 1)
-class BlockedApp extends HiveObject {
-  @HiveField(0)
+class BlockedApp {
   String packageName;
-
-  @HiveField(1)
   String appName;
-
-  @HiveField(2)
   bool isBlocked;
-
-  @HiveField(3)
   int? dailyLimitMinutes;
-
-  @HiveField(4)
   int usedTodayMinutes;
 
   BlockedApp({
@@ -26,4 +12,20 @@ class BlockedApp extends HiveObject {
     this.dailyLimitMinutes,
     this.usedTodayMinutes = 0,
   });
+
+  Map<String, dynamic> toMap() => {
+    'packageName': packageName,
+    'appName': appName,
+    'isBlocked': isBlocked,
+    'dailyLimitMinutes': dailyLimitMinutes,
+    'usedTodayMinutes': usedTodayMinutes,
+  };
+
+  factory BlockedApp.fromMap(Map map) => BlockedApp(
+    packageName: map['packageName'],
+    appName: map['appName'],
+    isBlocked: map['isBlocked'] ?? false,
+    dailyLimitMinutes: map['dailyLimitMinutes'],
+    usedTodayMinutes: map['usedTodayMinutes'] ?? 0,
+  );
 }

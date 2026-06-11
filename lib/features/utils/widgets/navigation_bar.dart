@@ -26,8 +26,8 @@ class _BottomNavigationBarCustomState extends State<BottomNavigationBarCustom> {
       width: double.infinity,
 
       color: brightness == Brightness.dark
-          ? AppColors.darkBorder
-          : AppColors.lightBorder,
+          ? AppColors.darkCard
+          : AppColors.lightCard,
       child: Padding(
         padding: const EdgeInsets.only(top: 10),
         child: Row(
@@ -96,7 +96,7 @@ class _BottomNavigationBarCustomState extends State<BottomNavigationBarCustom> {
             ),
           ),
           SizedBox(height: AppSize.height * 0.003,),
-          Text(text,style: AppTextStyle.navigation(context).copyWith(color:location == path ? AppColors.primary: AppColors.navigation),),
+          Text(text,style: AppTextStyle.navigationStyle(context).copyWith(color:location == path ? AppColors.primary: AppColors.textMedium),),
         ],
       ),
       onTap: () {

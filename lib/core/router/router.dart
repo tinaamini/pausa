@@ -67,7 +67,7 @@ final GoRouter router = GoRouter(
         return MultiBlocProvider(
           providers: [
             BlocProvider<HomeCubit>(create: (_) => HomeCubit(
-            )),
+            )..loadData()),
             BlocProvider<LocaleCubit>(create: (_) => LocaleCubit()),
           ],
           child: AppShell(child: child),

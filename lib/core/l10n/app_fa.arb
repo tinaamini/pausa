@@ -18,16 +18,24 @@
 
   "goodNight": "شب بخیر",
   "focusSession": "سشن تمرکز",
-  "currentStreak": "استریک فعلی",
-  "days": "{count} روز",
-  "@days": {
-    "placeholders": {
-      "count": {"type": "int"}
-    }
-  },
+    "deepWork": "کار عمیق",
+    "start":"شروع",
+"continueButton":"ادامه",
+"today":"امروز",
   "blockedApps": "اپ‌های بلاک‌شده",
   "timeSaved": "زمان ذخیره‌شده",
   "sessions": "سشن‌ها",
+
+
+
+  "currentStreak": "استریک فعلی",
+
+  "days": "روز",
+  "keepItUP":"ادامه بده!🔥",
+  "recentlyBlocked":"اخیراً بلاک ‌شده",
+  "noBlockedApps":"هنوز اپی بلاک نشده",
+
+
   "allApps": "همه اپ‌ها",
   "blocked": "بلاک‌شده",
   "noLimit": "بدون محدودیت",
@@ -35,7 +43,6 @@
   "addCustomApp": "+ اضافه کردن اپ",
   "schedules": "برنامه‌ریزی",
   "startSession": "شروع سشن",
-  "deepWork": "کار عمیق",
   "study": "مطالعه",
   "reading": "مطالعه",
   "custom": "سفارشی",

@@ -1,7 +1,6 @@
 {
   "@@locale": "en",
   "appName": "Pausa",
-  "welcomeTitle": "Welcome to Pausa",
   "welcomeSubtitle": "Control today. Focus on what matters.",
   "parentMode": "Parent Mode",
   "parentModeDesc": "Manage and protect your child's device",
@@ -20,15 +19,17 @@
 
   "focusSession": "Focus Session",
   "currentStreak": "Current Streak",
-  "days": "{count} days",
-  "@days": {
-    "placeholders": {
-      "count": {"type": "int"}
-    }
-  },
+  "days": " days",
+"keepItUp":"keep it up!🔥",
   "blockedApps": "Blocked Apps",
   "timeSaved": "Time Saved",
   "sessions": "Sessions",
+      "start":"Start",
+      "recentlyBlocked":"Recently Blocked",
+        "noBlockedApps":"No blocked apps yet",
+
+  "continueButton":"Continue",
+"today":"today",
   "allApps": "All Apps",
   "blocked": "Blocked",
   "noLimit": "No limit",

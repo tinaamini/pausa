@@ -10,11 +10,40 @@ class AppTextStyle {
 
 
 
-  static TextStyle navigation(BuildContext context) => TextStyle(
+
+  static TextStyle navigationStyle(BuildContext context) => TextStyle(
       fontFamily: _font(context),
-      fontSize:12.sp,
+      fontSize:14.sp,
       fontWeight: FontWeight.w400,
-      color: AppColors.navigation);
+      color: AppColors.textMedium);
+  static TextStyle intStyle(BuildContext context) => TextStyle(
+      fontFamily: _font(context),
+      fontSize:20.sp,
+      fontWeight: FontWeight.w500,
+      color: AppColors.textLight);
+
+
+  static greetingTitleStyle(BuildContext context) => TextStyle(
+      fontFamily: _font(context),
+      fontSize:24.sp,
+      fontWeight: FontWeight.w600,
+      color: AppColors.textLight);
+  static FocusSessionCardStyle(BuildContext context) => TextStyle(
+      fontFamily: _font(context),
+      fontSize:20.sp,
+      fontWeight: FontWeight.w600,
+      color: AppColors.textLight);
+
+  static welcomeSubtitleStyle(BuildContext context) => TextStyle(
+      fontFamily: _font(context),
+      fontSize:14.sp,
+      fontWeight: FontWeight.w400,
+      color: AppColors.textMedium);
+  static timeFocusStyle (BuildContext context) => TextStyle(
+      fontFamily: _font(context),
+      fontSize:24.sp,
+      fontWeight: FontWeight.w500,
+      color: AppColors.textLight);
 
 
 
