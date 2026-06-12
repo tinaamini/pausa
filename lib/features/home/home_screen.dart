@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  _HomeView();
+    return _HomeView();
   }
 }
 
@@ -72,7 +72,10 @@ class _HomeView extends StatelessWidget {
                     const Spacer(),
                     IconButton(
                       onPressed: () => context.pushNamed('/settings'),
-                      icon: const Icon(Icons.notifications_on_outlined,size: 34,),
+                      icon: const Icon(
+                        Icons.notifications_on_outlined,
+                        size: 34,
+                      ),
                     ),
                   ],
                 ),
@@ -83,14 +86,22 @@ class _HomeView extends StatelessWidget {
                   onStart: () => context.pushNamed('/focus'),
                 ),
                 const SizedBox(height: 16),
-            Align(
-              alignment: Alignment.centerLeft,
-               child:  Text(l10n.today,style:AppTextStyle.FocusSessionCardStyle(context).copyWith(color:isDark?AppColors.darkCard:null)),),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    l10n.today,
+                    style: AppTextStyle.FocusSessionCardStyle(
+                      context,
+                    ).copyWith(color: isDark ? AppColors.darkCard : null),
+                  ),
+                ),
                 const SizedBox(height: 16),
 
                 StatsRow(
                   blockedCount: state.blockedAppsCount,
-                  timeSaved: context.read<HomeCubit>().formatTime(state.timeSavedMinutes),
+                  timeSaved: context.read<HomeCubit>().formatTime(
+                    state.timeSavedMinutes,
+                  ),
                   sessions: state.sessionsCount,
                 ),
                 const SizedBox(height: 16),

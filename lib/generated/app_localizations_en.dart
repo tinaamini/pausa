@@ -81,6 +81,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noBlockedApps => 'No blocked apps yet';
 
   @override
+  String get searchApps => 'Search apps';
+
+  @override
+  String get noApplicationsFound => 'No Applications Found';
+
+  @override
+  String get minutesPerDay => 'minutes per day';
+
+  @override
+  String get unlimited => 'Unlimited';
+
+  @override
   String get continueButton => 'Continue';
 
   @override

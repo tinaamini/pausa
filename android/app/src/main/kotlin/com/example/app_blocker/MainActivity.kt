@@ -1,22 +1,15 @@
-package com.example.app_blocker
 
+
+package com.example.app_blocker
+import android.content.Context
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import android.app.usage.UsageStatsManager
 import android.app.usage.UsageEvents
-import android.graphics.PixelFormat
-import android.view.Gravity
-import android.view.WindowManager
-import android.widget.LinearLayout
-import android.widget.TextView
 
 class MainActivity : FlutterActivity() {
     private val CHANNEL = "app_blocker_channel"
-    private var overlayView: LinearLayout? = null
-    private var wm: WindowManager? = null
-    private var isOverlayVisible = false
-
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
@@ -34,19 +27,24 @@ class MainActivity : FlutterActivity() {
                         requestOverlayPermission()
                         result.success("opened")
                     }
-                    "showOverlay" -> {
-                        showBlockOverlay()
-                        result.success("shown")
-                    }
                     "canDrawOverlays" -> {
-                        val canDraw = android.provider.Settings.canDrawOverlays(this)
-                        result.success(canDraw)
+                        result.success(android.provider.Settings.canDrawOverlays(this))
+                    }
+                    "showOverlay" -> {
+                        // از Service صدا میزنیم نه اینجا
+                        startBlockService()
+                        result.success("started")
                     }
                     "removeOverlay" -> {
-                        removeOverlay()
+                        stopBlockService()
                         result.success("removed")
                     }
 
+                    "updateBlockedApps" -> {
+                        val apps = call.argument<List<String>>("apps") ?: listOf()
+                        saveBlockedApps(apps)
+                        result.success(true)
+                    }
 
                     else -> result.notImplemented()
                 }
@@ -67,8 +65,8 @@ class MainActivity : FlutterActivity() {
                 try {
                     val drawable = pm.getApplicationIcon(appInfo)
                     val bitmap = android.graphics.Bitmap.createBitmap(
-                        drawable.intrinsicWidth,
-                        drawable.intrinsicHeight,
+                        drawable.intrinsicWidth.coerceAtLeast(1),
+                        drawable.intrinsicHeight.coerceAtLeast(1),
                         android.graphics.Bitmap.Config.ARGB_8888
                     )
                     val canvas = android.graphics.Canvas(bitmap)
@@ -76,18 +74,26 @@ class MainActivity : FlutterActivity() {
                     drawable.draw(canvas)
 
                     val stream = java.io.ByteArrayOutputStream()
-                    bitmap.compress(android.graphics.Bitmap.CompressFormat.PNG, 100, stream)
-                    val encodedImage = android.util.Base64.encodeToString(stream.toByteArray(), android.util.Base64.NO_WRAP)
+                    bitmap.compress(android.graphics.Bitmap.CompressFormat.PNG, 85, stream)
+                    bitmap.recycle()  // ← جلوگیری از memory leak
 
-                    apps.add(
-                        mapOf(
-                            "name" to label,
-                            "package" to packageName,
-                            "icon" to encodedImage
-                        )
+                    val encodedImage = android.util.Base64.encodeToString(
+                        stream.toByteArray(),
+                        android.util.Base64.NO_WRAP
                     )
+
+                    apps.add(mapOf(
+                        "name" to label,
+                        "package" to packageName,
+                        "icon" to encodedImage
+                    ))
                 } catch (e: Exception) {
-                    e.printStackTrace()
+                    // اگه آیکون نداشت بدون آیکون اضافه کن
+                    apps.add(mapOf(
+                        "name" to label,
+                        "package" to packageName,
+                        "icon" to ""
+                    ))
                 }
             }
         }
@@ -98,7 +104,7 @@ class MainActivity : FlutterActivity() {
     private fun getForegroundApp(): String {
         val usageStatsManager = getSystemService(USAGE_STATS_SERVICE) as UsageStatsManager
         val endTime = System.currentTimeMillis()
-        val beginTime = endTime - 10_000
+        val beginTime = endTime - 1_000  // ۱ ثانیه کافیه
 
         val usageEvents = usageStatsManager.queryEvents(beginTime, endTime)
         var lastApp = "unknown"
@@ -130,76 +136,28 @@ class MainActivity : FlutterActivity() {
         }
     }
 
-    private fun showBlockOverlay() {
-        if (!android.provider.Settings.canDrawOverlays(this)) {
-            android.widget.Toast.makeText(this, "Overlay permission not granted", android.widget.Toast.LENGTH_SHORT).show()
-            requestOverlayPermission()
-            return
-        }
-
-        if (isOverlayVisible) return
-
-        wm = getSystemService(WINDOW_SERVICE) as WindowManager
-
-        val params = WindowManager.LayoutParams(
-            WindowManager.LayoutParams.MATCH_PARENT,
-            WindowManager.LayoutParams.MATCH_PARENT,
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
-                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
-            else
-                WindowManager.LayoutParams.TYPE_PHONE,
-            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                    or WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
-                    or WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
-            PixelFormat.TRANSLUCENT
-        )
-
-        overlayView = LinearLayout(this).apply {
-            setBackgroundColor(android.graphics.Color.argb(180, 255, 0, 0))
-
-            val textView = TextView(this@MainActivity).apply {
-                text = "🚫 This app is blocked!"
-                textSize = 22f
-                setTextColor(android.graphics.Color.WHITE)
-                gravity = Gravity.CENTER
-                setPadding(60, 200, 60, 60)
-            }
-
-            addView(textView)
-        }
-
-        try {
-            wm?.addView(overlayView, params)
-            isOverlayVisible = true
-        } catch (e: Exception) {
-            e.printStackTrace()
+    private fun startBlockService() {
+        val intent = android.content.Intent(this, BlockService::class.java)
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            startForegroundService(intent)
+        } else {
+            startService(intent)
         }
     }
 
-    private fun removeOverlay() {
-        try {
-            if (isOverlayVisible && wm != null && overlayView != null) {
-                wm?.removeView(overlayView)
-                isOverlayVisible = false
-                overlayView = null
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+    private fun stopBlockService() {
+        val intent = android.content.Intent(this, BlockService::class.java)
+        stopService(intent)
     }
 
-    override fun onPause() {
-        super.onPause()
-        removeOverlay()
+
+    private fun saveBlockedApps(apps: List<String>) {
+        val prefs = getSharedPreferences("block_prefs", Context.MODE_PRIVATE)
+        prefs.edit().putStringSet("blocked_apps", apps.toSet()).apply()
     }
 
-    override fun onStop() {
-        super.onStop()
-        removeOverlay()
-    }
-
+    // onDestroy فقط نه onPause/onStop
     override fun onDestroy() {
         super.onDestroy()
-        removeOverlay()
     }
 }

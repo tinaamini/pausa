@@ -24,10 +24,18 @@ class _BottomNavigationBarCustomState extends State<BottomNavigationBarCustom> {
     return Container(
       height: AppSize.height * 0.075,
       width: double.infinity,
+decoration: BoxDecoration(
+  color: brightness == Brightness.dark
+      ? AppColors.darkCard
+      : AppColors.lightCard,
+    border: Border(
+      top: BorderSide(
+        color:AppColors.grayLight,
+        width: 1,
+      ),
+    )
+),
 
-      color: brightness == Brightness.dark
-          ? AppColors.darkCard
-          : AppColors.lightCard,
       child: Padding(
         padding: const EdgeInsets.only(top: 10),
         child: Row(

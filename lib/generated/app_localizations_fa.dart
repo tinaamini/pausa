@@ -81,6 +81,18 @@ class AppLocalizationsFa extends AppLocalizations {
   String get noBlockedApps => 'هنوز اپی بلاک نشده';
 
   @override
+  String get searchApps => 'جستجوی اپ‌ها';
+
+  @override
+  String get noApplicationsFound => 'اپی پیدا نشد';
+
+  @override
+  String get minutesPerDay => 'دقیقه در روز ';
+
+  @override
+  String get unlimited => 'بدون محدودیت ';
+
+  @override
   String get continueButton => 'ادامه';
 
   @override

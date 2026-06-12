@@ -1,39 +1,33 @@
 part of 'apps_cubit.dart';
 
-enum AppsStatus { initial, loading, loaded, error }
-
 class AppsState {
-  final List<InstalledApp> apps;
+  final List<InstalledApp> allApps;
   final List<InstalledApp> filteredApps;
-  final AppsStatus status;
+  final bool isLoading;
   final String searchQuery;
   final bool showOnlyBlocked;
-  final String? error;
 
   const AppsState({
-    this.apps = const [],
+    this.allApps = const [],
     this.filteredApps = const [],
-    this.status = AppsStatus.initial,
+    this.isLoading = true,
     this.searchQuery = '',
     this.showOnlyBlocked = false,
-    this.error,
   });
 
   AppsState copyWith({
-    List<InstalledApp>? apps,
+    List<InstalledApp>? allApps,
     List<InstalledApp>? filteredApps,
-    AppsStatus? status,
+    bool? isLoading,
     String? searchQuery,
     bool? showOnlyBlocked,
-    String? error,
   }) {
     return AppsState(
-      apps: apps ?? this.apps,
+      allApps: allApps ?? this.allApps,
       filteredApps: filteredApps ?? this.filteredApps,
-      status: status ?? this.status,
+      isLoading: isLoading ?? this.isLoading,
       searchQuery: searchQuery ?? this.searchQuery,
       showOnlyBlocked: showOnlyBlocked ?? this.showOnlyBlocked,
-      error: error ?? this.error,
     );
   }
 }

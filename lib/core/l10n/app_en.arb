@@ -27,6 +27,12 @@
       "start":"Start",
       "recentlyBlocked":"Recently Blocked",
         "noBlockedApps":"No blocked apps yet",
+        "searchApps": "Search apps",
+        "noApplicationsFound":"No Applications Found",
+        "minutesPerDay":"minutes per day",
+        "unlimited":"Unlimited",
+
+
 
   "continueButton":"Continue",
 "today":"today",

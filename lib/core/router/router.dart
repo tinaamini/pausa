@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pausa/core/router/rout_name.dart';
 import 'package:pausa/core/theme/app_colors.dart';
 import 'package:pausa/features/apps/apps_screen.dart';
+import 'package:pausa/features/apps/cubit/apps_cubit.dart';
 import 'package:pausa/features/focus/focus_screen.dart';
 import 'package:pausa/features/home/cubit/home_Cubit.dart';
 import 'package:pausa/features/home/cubit/home_state.dart';
@@ -69,6 +70,8 @@ final GoRouter router = GoRouter(
             BlocProvider<HomeCubit>(create: (_) => HomeCubit(
             )..loadData()),
             BlocProvider<LocaleCubit>(create: (_) => LocaleCubit()),
+        BlocProvider(
+        create: (_) => AppsCubit()..loadApps(),),
           ],
           child: AppShell(child: child),
         );

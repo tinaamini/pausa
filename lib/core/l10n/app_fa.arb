@@ -34,6 +34,10 @@
   "keepItUP":"ادامه بده!🔥",
   "recentlyBlocked":"اخیراً بلاک ‌شده",
   "noBlockedApps":"هنوز اپی بلاک نشده",
+"searchApps": "جستجوی اپ‌ها",
+"noApplicationsFound": "اپی پیدا نشد",
+"minutesPerDay":"دقیقه در روز ",
+"unlimited":"بدون محدودیت ",
 
 
   "allApps": "همه اپ‌ها",

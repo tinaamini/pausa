@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
+
+  static const grayLight = Color(0xFFDCDCDC);
+
   // background
-  static const backGroundLight= Color(0xFFFFF8EA);
+  static const backGroundLight= Color(0xFFFBF8F0);
   static const backGroundDark = Color(0xFF1A1440);
 
   //text

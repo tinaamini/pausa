@@ -242,6 +242,30 @@ abstract class AppLocalizations {
   /// **'No blocked apps yet'**
   String get noBlockedApps;
 
+  /// No description provided for @searchApps.
+  ///
+  /// In en, this message translates to:
+  /// **'Search apps'**
+  String get searchApps;
+
+  /// No description provided for @noApplicationsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No Applications Found'**
+  String get noApplicationsFound;
+
+  /// No description provided for @minutesPerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'minutes per day'**
+  String get minutesPerDay;
+
+  /// No description provided for @unlimited.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlimited'**
+  String get unlimited;
+
   /// No description provided for @continueButton.
   ///
   /// In en, this message translates to:
