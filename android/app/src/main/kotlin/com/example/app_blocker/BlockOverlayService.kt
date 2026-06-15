@@ -20,6 +20,9 @@ class BlockService : Service() {
     private lateinit var windowManager: WindowManager
     private var overlayView: View? = null
 
+    private var overlayShownAt: Long = 0
+    private val OVERLAY_COOLDOWN_MS = 3000L // 3 ثانیه cooldown
+
     private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
 
     private fun getBlockedApps(): Set<String> {
@@ -29,9 +32,7 @@ class BlockService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-
         windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
-
         startForegroundServiceNotification()
         startMonitoring()
     }
@@ -48,7 +49,7 @@ class BlockService : Service() {
         serviceScope.launch {
             while (isActive) {
                 checkForegroundApp()
-                delay(800)
+                delay(500)
             }
         }
     }
@@ -61,7 +62,7 @@ class BlockService : Service() {
                 getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
 
             val endTime = System.currentTimeMillis()
-            val beginTime = endTime - 10_000
+            val beginTime = endTime - 3 * 60 * 1000
 
             val usageStats = usageStatsManager.queryUsageStats(
                 UsageStatsManager.INTERVAL_DAILY,
@@ -93,10 +94,7 @@ class BlockService : Service() {
         }
 
         if (getBlockedApps().contains(foregroundApp)) {
-            android.util.Log.d(
-                "BlockService",
-                "🚫 BLOCKING: $foregroundApp"
-            )
+            android.util.Log.d("BlockService", "🚫 BLOCKING: $foregroundApp")
             showOverlay()
         } else {
             removeOverlay()
@@ -104,15 +102,14 @@ class BlockService : Service() {
     }
 
     private fun showOverlay() {
-
         if (overlayView != null) return
+
+        overlayShownAt = System.currentTimeMillis() // زمان نشون دادن overlay رو ذخیره کن
 
         overlayView = LayoutInflater.from(this)
             .inflate(android.R.layout.simple_list_item_1, null)
 
-        overlayView?.setBackgroundColor(
-            0xCC000000.toInt()
-        )
+        overlayView?.setBackgroundColor(0xCC000000.toInt())
 
         val params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.MATCH_PARENT,
@@ -121,25 +118,26 @@ class BlockService : Service() {
                 WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
             else
                 WindowManager.LayoutParams.TYPE_PHONE,
-            WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
+            WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or
+                    WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
             PixelFormat.TRANSLUCENT
         )
 
-        windowManager.addView(
-            overlayView,
-            params
-        )
+        windowManager.addView(overlayView, params)
     }
 
     private fun removeOverlay() {
+        // اگه overlay تازه نشون داده شده، صبر کن
+        if (overlayView != null) {
+            val elapsed = System.currentTimeMillis() - overlayShownAt
+            if (elapsed < OVERLAY_COOLDOWN_MS) return
+        }
 
         overlayView?.let {
-
             try {
                 windowManager.removeView(it)
             } catch (_: Exception) {
             }
-
             overlayView = null
         }
     }
@@ -149,23 +147,16 @@ class BlockService : Service() {
         val channelId = "block_service_channel"
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
             val channel = NotificationChannel(
                 channelId,
                 "Block Service",
                 NotificationManager.IMPORTANCE_LOW
             )
-
-            val manager =
-                getSystemService(NotificationManager::class.java)
-
+            val manager = getSystemService(NotificationManager::class.java)
             manager.createNotificationChannel(channel)
         }
 
-        val notification = Notification.Builder(
-            this,
-            channelId
-        )
+        val notification = Notification.Builder(this, channelId)
             .setContentTitle("App Blocker Active")
             .setContentText("Monitoring apps...")
             .setSmallIcon(android.R.drawable.ic_lock_lock)
@@ -176,7 +167,6 @@ class BlockService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
-
         serviceScope.cancel()
         removeOverlay()
     }
