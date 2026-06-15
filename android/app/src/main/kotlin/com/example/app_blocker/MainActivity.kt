@@ -46,6 +46,16 @@ class MainActivity : FlutterActivity() {
                         result.success(true)
                     }
 
+                    "hasUsagePermission" -> {
+                        val appOps = getSystemService(APP_OPS_SERVICE) as android.app.AppOpsManager
+                        val mode = appOps.checkOpNoThrow(
+                            android.app.AppOpsManager.OPSTR_GET_USAGE_STATS,
+                            android.os.Process.myUid(),
+                            packageName
+                        )
+                        result.success(mode == android.app.AppOpsManager.MODE_ALLOWED)
+                    }
+
                     else -> result.notImplemented()
                 }
             }
@@ -100,6 +110,7 @@ class MainActivity : FlutterActivity() {
 
         return apps
     }
+
 
     private fun getForegroundApp(): String {
         val usageStatsManager = getSystemService(USAGE_STATS_SERVICE) as UsageStatsManager

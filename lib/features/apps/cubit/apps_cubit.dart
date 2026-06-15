@@ -28,7 +28,7 @@ class AppsCubit extends Cubit<AppsState> {
           app.dailyLimitMinutes = blockedApp.dailyLimitMinutes;
         }
         return app;
-      }).toList();
+      }).where((app) => app.packageName != 'com.example.app_blocker').toList();
 
       apps.sort((a, b) {
         if (a.isBlocked && !b.isBlocked) return -1;
@@ -41,7 +41,16 @@ class AppsCubit extends Cubit<AppsState> {
         filteredApps: apps,
         isLoading: false,
       ));
+
       await _syncBlockedAppsToNative();
+
+      final canDraw = await _channel.invokeMethod<bool>('canDrawOverlays') ?? false;
+      if (canDraw) {
+        await _channel.invokeMethod('showOverlay');
+        debugPrint('✅ BlockService started');
+      } else {
+        debugPrint('⚠️ No overlay permission yet');
+      }
     } catch (e) {
       debugPrint('❌ AppsCubit error: $e');
       emit(state.copyWith(isLoading: false));
@@ -54,7 +63,6 @@ class AppsCubit extends Cubit<AppsState> {
       final matchBlocked = !state.showOnlyBlocked || app.isBlocked;
       return matchName && matchBlocked;
     }).toList();
-
     emit(state.copyWith(searchQuery: query, filteredApps: filtered));
   }
 
@@ -66,11 +74,18 @@ class AppsCubit extends Cubit<AppsState> {
           .contains(state.searchQuery.toLowerCase());
       return matchBlocked && matchSearch;
     }).toList();
-
     emit(state.copyWith(showOnlyBlocked: value, filteredApps: filtered));
   }
 
   Future<void> toggleBlock(InstalledApp app) async {
+    if (!app.isBlocked) {
+      final hasPermission = await _checkPermissions();
+      if (!hasPermission) {
+        emit(state.copyWith(pendingBlockApp: app));
+        return;
+      }
+    }
+
     final appsBox = Hive.box('blocked_apps');
     app.isBlocked = !app.isBlocked;
 
@@ -81,13 +96,19 @@ class AppsCubit extends Cubit<AppsState> {
       dailyLimitMinutes: app.dailyLimitMinutes,
     );
     await appsBox.put(app.packageName, blockedApp.toMap());
-
     await _syncBlockedAppsToNative();
 
-    emit(state.copyWith(
-      allApps: List<InstalledApp>.from(state.allApps),
-      filteredApps: List<InstalledApp>.from(state.filteredApps),
-    ));
+    final updatedAll = state.allApps.map((a) {
+      if (a.packageName == app.packageName) return app;
+      return a;
+    }).toList();
+
+    final updatedFiltered = state.filteredApps.map((a) {
+      if (a.packageName == app.packageName) return app;
+      return a;
+    }).toList();
+
+    emit(state.copyWith(allApps: updatedAll, filteredApps: updatedFiltered));
   }
 
   Future<void> setTimeLimit(InstalledApp app, int? minutes) async {
@@ -102,10 +123,36 @@ class AppsCubit extends Cubit<AppsState> {
     );
     await appsBox.put(app.packageName, blockedApp.toMap());
 
-    emit(state.copyWith(
-      allApps: List<InstalledApp>.from(state.allApps),
-      filteredApps: List<InstalledApp>.from(state.filteredApps),
-    ));
+    final updatedAll = state.allApps.map((a) {
+      if (a.packageName == app.packageName) return app;
+      return a;
+    }).toList();
+
+    final updatedFiltered = state.filteredApps.map((a) {
+      if (a.packageName == app.packageName) return app;
+      return a;
+    }).toList();
+
+    emit(state.copyWith(allApps: updatedAll, filteredApps: updatedFiltered));
+  }
+
+  Future<void> requestOverlayPermission() async {
+    await _channel.invokeMethod('requestUsagePermission');
+    // نیازی به emit نیست — counter کارشو کرده
+  }
+
+  Future<void> onAppResumed() async {
+    // اگه pending app نداریم کاری نکن
+    if (state.pendingBlockApp == null) return;
+
+    final hasPermission =
+        await _channel.invokeMethod<bool>('hasUsagePermission') ?? false;
+
+    if (hasPermission) {
+      final pending = state.pendingBlockApp!;
+      emit(state.copyWith(clearPendingApp: true));
+      await toggleBlock(pending);
+    }
   }
 
   Future<void> _syncBlockedAppsToNative() async {
@@ -126,6 +173,25 @@ class AppsCubit extends Cubit<AppsState> {
       await _channel.invokeMethod('updateBlockedApps', {'apps': blockedPackages});
     } catch (e) {
       debugPrint('❌ sync error: $e');
+    }
+  }
+
+  Future<bool> _checkPermissions() async {
+    try {
+      final hasPermission =
+          await _channel.invokeMethod<bool>('hasUsagePermission') ?? false;
+      if (!hasPermission) {
+        emit(state.copyWith(
+          permissionDeniedCount: state.permissionDeniedCount + 1,
+        ));
+        return false;
+      }
+      return true;
+    } catch (e) {
+      emit(state.copyWith(
+        permissionDeniedCount: state.permissionDeniedCount + 1,
+      ));
+      return false;
     }
   }
 }

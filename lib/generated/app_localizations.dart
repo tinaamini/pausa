@@ -266,6 +266,144 @@ abstract class AppLocalizations {
   /// **'Unlimited'**
   String get unlimited;
 
+  /// No description provided for @trackAppsUsage.
+  ///
+  /// In en, this message translates to:
+  /// **'Track Apps Usage'**
+  String get trackAppsUsage;
+
+  /// No description provided for @trackAppsUsageDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'pausa needs access to app usage data \n to help you stay focused'**
+  String get trackAppsUsageDescription;
+
+  /// No description provided for @permissionFeature1Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Block Distracting Apps'**
+  String get permissionFeature1Title;
+
+  /// No description provided for @permissionFeature1Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Automatically block apps\n that waste your time.'**
+  String get permissionFeature1Desc;
+
+  /// No description provided for @permissionFeature2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Track Screen Time'**
+  String get permissionFeature2Title;
+
+  /// No description provided for @permissionFeature2Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'See how much time you \n spend on apps.'**
+  String get permissionFeature2Desc;
+
+  /// No description provided for @permissionFeature3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Build Statistics'**
+  String get permissionFeature3Title;
+
+  /// No description provided for @permissionFeature3Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Get insights about your \n daily app usage.'**
+  String get permissionFeature3Desc;
+
+  /// No description provided for @permissionFeature4Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Run Schedules'**
+  String get permissionFeature4Title;
+
+  /// No description provided for @permissionFeature4Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Automatically follow your \n focus schedules.'**
+  String get permissionFeature4Desc;
+
+  /// No description provided for @permissionCanSee.
+  ///
+  /// In en, this message translates to:
+  /// **'What we can see'**
+  String get permissionCanSee;
+
+  /// No description provided for @permissionCanSeeItem1.
+  ///
+  /// In en, this message translates to:
+  /// **'App names'**
+  String get permissionCanSeeItem1;
+
+  /// No description provided for @permissionCanSeeItem2.
+  ///
+  /// In en, this message translates to:
+  /// **'Time spent in apps'**
+  String get permissionCanSeeItem2;
+
+  /// No description provided for @permissionCanSeeItem3.
+  ///
+  /// In en, this message translates to:
+  /// **'Launch count'**
+  String get permissionCanSeeItem3;
+
+  /// No description provided for @permissionCanSeeItem4.
+  ///
+  /// In en, this message translates to:
+  /// **'Usage duration'**
+  String get permissionCanSeeItem4;
+
+  /// No description provided for @permissionCannotSee.
+  ///
+  /// In en, this message translates to:
+  /// **'What we can\'t see'**
+  String get permissionCannotSee;
+
+  /// No description provided for @permissionCannotSeeItem1.
+  ///
+  /// In en, this message translates to:
+  /// **'Messages'**
+  String get permissionCannotSeeItem1;
+
+  /// No description provided for @permissionCannotSeeItem2.
+  ///
+  /// In en, this message translates to:
+  /// **'Photos'**
+  String get permissionCannotSeeItem2;
+
+  /// No description provided for @permissionCannotSeeItem3.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords'**
+  String get permissionCannotSeeItem3;
+
+  /// No description provided for @permissionCannotSeeItem4.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal content'**
+  String get permissionCannotSeeItem4;
+
+  /// No description provided for @permissionGrantButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Grant Permission'**
+  String get permissionGrantButton;
+
+  /// No description provided for @permissionNotNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get permissionNotNow;
+
+  /// No description provided for @permissionPrivacyNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Your data stays on your device.\n We never share your personal information.'**
+  String get permissionPrivacyNote;
+
   /// No description provided for @continueButton.
   ///
   /// In en, this message translates to:

@@ -28,8 +28,9 @@ class AppColors {
   static const lightCard = Color(0xFFFFFFFF);
 
   // Accent
+  static const success = Color(0xFF337036);
+
   static const accent = Color(0xFFFF7B54);      // streak fire
-  static const success = Color(0xFF4CAF50);
   static const warning = Color(0xFFFFC107);
   static const error = Color(0xFFE53935);
 

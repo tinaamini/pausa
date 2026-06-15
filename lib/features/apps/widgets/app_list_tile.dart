@@ -29,7 +29,8 @@ class AppListTile extends StatelessWidget {
         color: isDark ? AppColors.darkCard : AppColors.lightCard,
         borderRadius: BorderRadius.circular(14),
         border: app.isBlocked
-            ? Border.all(color: AppColors.primary.withOpacity(0.4))
+            ? Border.all(color:AppColors.primary.withValues(alpha: 0.4)
+        )
             : null,
       ),
       child: Row(

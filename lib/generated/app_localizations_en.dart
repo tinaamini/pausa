@@ -93,6 +93,81 @@ class AppLocalizationsEn extends AppLocalizations {
   String get unlimited => 'Unlimited';
 
   @override
+  String get trackAppsUsage => 'Track Apps Usage';
+
+  @override
+  String get trackAppsUsageDescription =>
+      'pausa needs access to app usage data \n to help you stay focused';
+
+  @override
+  String get permissionFeature1Title => 'Block Distracting Apps';
+
+  @override
+  String get permissionFeature1Desc =>
+      'Automatically block apps\n that waste your time.';
+
+  @override
+  String get permissionFeature2Title => 'Track Screen Time';
+
+  @override
+  String get permissionFeature2Desc =>
+      'See how much time you \n spend on apps.';
+
+  @override
+  String get permissionFeature3Title => 'Build Statistics';
+
+  @override
+  String get permissionFeature3Desc =>
+      'Get insights about your \n daily app usage.';
+
+  @override
+  String get permissionFeature4Title => 'Run Schedules';
+
+  @override
+  String get permissionFeature4Desc =>
+      'Automatically follow your \n focus schedules.';
+
+  @override
+  String get permissionCanSee => 'What we can see';
+
+  @override
+  String get permissionCanSeeItem1 => 'App names';
+
+  @override
+  String get permissionCanSeeItem2 => 'Time spent in apps';
+
+  @override
+  String get permissionCanSeeItem3 => 'Launch count';
+
+  @override
+  String get permissionCanSeeItem4 => 'Usage duration';
+
+  @override
+  String get permissionCannotSee => 'What we can\'t see';
+
+  @override
+  String get permissionCannotSeeItem1 => 'Messages';
+
+  @override
+  String get permissionCannotSeeItem2 => 'Photos';
+
+  @override
+  String get permissionCannotSeeItem3 => 'Passwords';
+
+  @override
+  String get permissionCannotSeeItem4 => 'Personal content';
+
+  @override
+  String get permissionGrantButton => 'Grant Permission';
+
+  @override
+  String get permissionNotNow => 'Not now';
+
+  @override
+  String get permissionPrivacyNote =>
+      'Your data stays on your device.\n We never share your personal information.';
+
+  @override
   String get continueButton => 'Continue';
 
   @override

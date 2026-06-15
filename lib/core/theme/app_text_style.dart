@@ -44,6 +44,19 @@ class AppTextStyle {
       fontSize:24.sp,
       fontWeight: FontWeight.w500,
       color: AppColors.textLight);
+  static usageTitleDialog (BuildContext context) => TextStyle(
+
+      fontFamily: _font(context),
+      fontSize:9.sp,
+      fontWeight: FontWeight.w500,
+      color: AppColors.textLight);
+  static usageDescriptionDialog (BuildContext context) => TextStyle(
+
+
+      fontFamily: _font(context),
+      fontSize:8.sp,
+      fontWeight: FontWeight.w400,
+      color: AppColors.textMedium);
 
 
 

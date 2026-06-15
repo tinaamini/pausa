@@ -93,6 +93,80 @@ class AppLocalizationsFa extends AppLocalizations {
   String get unlimited => 'بدون محدودیت ';
 
   @override
+  String get trackAppsUsage => 'نظارت بر استفاده از برنامه‌ها ';
+
+  @override
+  String get trackAppsUsageDescription =>
+      'برای کمک به تمرکز،\n پائوزا به داده‌های استفاده از برنامه‌ها نیاز دارد ';
+
+  @override
+  String get permissionFeature1Title => 'بلاک اپ‌های حواس‌پرت‌کن';
+
+  @override
+  String get permissionFeature1Desc =>
+      'اپ‌هایی که وقتت رو\n هدر میدن رو بلاک کن';
+
+  @override
+  String get permissionFeature2Title => 'ردیابی زمان صفحه';
+
+  @override
+  String get permissionFeature2Desc => 'ببین چقدر وقت \nتوی اپ‌ها میگذرونی';
+
+  @override
+  String get permissionFeature3Title => 'آمار و تحلیل';
+
+  @override
+  String get permissionFeature3Desc =>
+      'اطلاعاتی درباره استفاده\n روزانه‌ات از اپ‌ها بگیر';
+
+  @override
+  String get permissionFeature4Title => 'اجرای برنامه‌ها';
+
+  @override
+  String get permissionFeature4Desc =>
+      'برنامه‌های تمرکزت رو\n به صورت خودکار دنبال کن';
+
+  @override
+  String get permissionCanSee => 'چی میبینیم';
+
+  @override
+  String get permissionCanSeeItem1 => 'اسم اپ‌ها';
+
+  @override
+  String get permissionCanSeeItem2 => 'زمان صرف‌شده در اپ‌ها';
+
+  @override
+  String get permissionCanSeeItem3 => 'تعداد باز کردن';
+
+  @override
+  String get permissionCanSeeItem4 => 'مدت استفاده';
+
+  @override
+  String get permissionCannotSee => 'چی نمیبینیم';
+
+  @override
+  String get permissionCannotSeeItem1 => 'پیام‌ها';
+
+  @override
+  String get permissionCannotSeeItem2 => 'عکس‌ها';
+
+  @override
+  String get permissionCannotSeeItem3 => 'رمزها';
+
+  @override
+  String get permissionCannotSeeItem4 => 'محتوای شخصی';
+
+  @override
+  String get permissionGrantButton => 'دادن دسترسی';
+
+  @override
+  String get permissionNotNow => 'بعداً';
+
+  @override
+  String get permissionPrivacyNote =>
+      'اطلاعات روی گوشیت میمونه.\n هیچ اطلاعات شخصی‌ای به اشتراک گذاشته نمیشه.';
+
+  @override
   String get continueButton => 'ادامه';
 
   @override
